@@ -43,18 +43,27 @@ class ProjectsTableViewController: UITableViewController {
     }
 
 
-    /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        guard let segueID = segue.identifier, let selectedRow = tableView.indexPathForSelectedRow?.row else { return }
+        
+        switch segueID {
+        case StoryBoard.showProjectTasksSegueIdentifier:
+            if let tasksVC = segue.destination as? TasksTableViewController {
+                tasksVC.project = projects?[selectedRow]
+            }
+        default:
+            break
+        }
     }
-    */
+
     
     
     // MARK: - PRIVATE SECTION -
+    private struct StoryBoard {
+        static let showProjectTasksSegueIdentifier = "ShowProjectTasks"
+    }
     
     @IBAction private func refreshProjects() {
         showActivityIndicator()
