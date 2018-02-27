@@ -1,5 +1,5 @@
 //
-//  Network.swift
+//  General.swift
 //  Trophy Hunter
 //
 //  Created by Dario on 1/24/18.
