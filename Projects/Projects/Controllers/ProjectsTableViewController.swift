@@ -34,6 +34,7 @@ class ProjectsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let projectsData = projects, indexPath.row < projectsData.count else { return UITableViewCell() }
         
+        //TODO: We could create a custom ProjectInformationCell class that allows as to show additional project information in each table view cell, customizing its UI elements (size, color, layout, etcetera).
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProjectInformationCell", for: indexPath)
         cell.textLabel?.text = projectsData[indexPath.row].name
         cell.detailTextLabel?.text = projectsData[indexPath.row].company?.name
