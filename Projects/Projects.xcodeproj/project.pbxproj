@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		A325200C204594CE00758CAE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A325200B204594CE00758CAE /* AppDelegate.swift */; };
-		A325200E204594CE00758CAE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A325200D204594CE00758CAE /* ViewController.swift */; };
 		A3252011204594CE00758CAE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A325200F204594CE00758CAE /* Main.storyboard */; };
 		A3252013204594CE00758CAE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3252012204594CE00758CAE /* Assets.xcassets */; };
 		A3252016204594CE00758CAE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3252014204594CE00758CAE /* LaunchScreen.storyboard */; };
@@ -16,6 +15,8 @@
 		A32520302045964600758CAE /* TeamworkMediator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A325202F2045964600758CAE /* TeamworkMediator.swift */; };
 		A32520332045990D00758CAE /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32520322045990D00758CAE /* Logging.swift */; };
 		A32520352045A31100758CAE /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32520342045A31100758CAE /* Project.swift */; };
+		A32520372045B14900758CAE /* ProjectsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32520362045B14900758CAE /* ProjectsTableViewController.swift */; };
+		A32520392045B27A00758CAE /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32520382045B27A00758CAE /* General.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,7 +32,6 @@
 /* Begin PBXFileReference section */
 		A3252008204594CE00758CAE /* Projects.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Projects.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A325200B204594CE00758CAE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A325200D204594CE00758CAE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A3252010204594CE00758CAE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A3252012204594CE00758CAE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A3252015204594CE00758CAE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -42,6 +42,8 @@
 		A325202F2045964600758CAE /* TeamworkMediator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamworkMediator.swift; sourceTree = "<group>"; };
 		A32520322045990D00758CAE /* Logging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
 		A32520342045A31100758CAE /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
+		A32520362045B14900758CAE /* ProjectsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsTableViewController.swift; sourceTree = "<group>"; };
+		A32520382045B27A00758CAE /* General.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = General.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,7 +126,7 @@
 		A325202D204594FA00758CAE /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				A325200D204594CE00758CAE /* ViewController.swift */,
+				A32520362045B14900758CAE /* ProjectsTableViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -140,6 +142,7 @@
 		A3252031204598F900758CAE /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				A32520382045B27A00758CAE /* General.swift */,
 				A32520322045990D00758CAE /* Logging.swift */,
 			);
 			path = Utilities;
@@ -248,11 +251,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A325200E204594CE00758CAE /* ViewController.swift in Sources */,
+				A32520392045B27A00758CAE /* General.swift in Sources */,
 				A325200C204594CE00758CAE /* AppDelegate.swift in Sources */,
 				A32520352045A31100758CAE /* Project.swift in Sources */,
 				A32520302045964600758CAE /* TeamworkMediator.swift in Sources */,
 				A32520332045990D00758CAE /* Logging.swift in Sources */,
+				A32520372045B14900758CAE /* ProjectsTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
