@@ -13,14 +13,18 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        TeamworkMediator.shared.delegate = self
         TeamworkMediator.shared.retrieveProjects()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-
 }
 
+
+extension ViewController: TeamworkMediatorDelegate {
+    func errorReceived(_ error: NSError) {
+        logMessage(.Info, error.debugDescription)
+    }
+
+    func projectsDataReceived(projects: [Project]) {
+        logMessage(.Info, projects.debugDescription)
+    }
+}

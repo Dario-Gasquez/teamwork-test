@@ -15,6 +15,7 @@
 		A3252021204594CE00758CAE /* ProjectsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3252020204594CE00758CAE /* ProjectsTests.swift */; };
 		A32520302045964600758CAE /* TeamworkMediator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A325202F2045964600758CAE /* TeamworkMediator.swift */; };
 		A32520332045990D00758CAE /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32520322045990D00758CAE /* Logging.swift */; };
+		A32520352045A31100758CAE /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32520342045A31100758CAE /* Project.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		A3252022204594CE00758CAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A325202F2045964600758CAE /* TeamworkMediator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamworkMediator.swift; sourceTree = "<group>"; };
 		A32520322045990D00758CAE /* Logging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
+		A32520342045A31100758CAE /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 		A325202B204594EB00758CAE /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A32520342045A31100758CAE /* Project.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -247,6 +250,7 @@
 			files = (
 				A325200E204594CE00758CAE /* ViewController.swift in Sources */,
 				A325200C204594CE00758CAE /* AppDelegate.swift in Sources */,
+				A32520352045A31100758CAE /* Project.swift in Sources */,
 				A32520302045964600758CAE /* TeamworkMediator.swift in Sources */,
 				A32520332045990D00758CAE /* Logging.swift in Sources */,
 			);

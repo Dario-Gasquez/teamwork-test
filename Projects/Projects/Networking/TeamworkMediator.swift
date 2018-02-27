@@ -9,7 +9,7 @@
 import Foundation
 
 protocol TeamworkMediatorDelegate: class {
-    //TODO: func projectsDataReceived(projects: ProjectsData)
+    func projectsDataReceived(projects: [Project])
     func errorReceived(_ error: NSError)
 }
 
@@ -35,6 +35,19 @@ final class TeamworkMediator {
             if let nsError = error as NSError? {
                 DispatchQueue.main.async {
                     self.delegate?.errorReceived(nsError)
+                }
+                return
+            }
+            
+            guard let httpResponse = response, let jsonDictionary = json else { return }
+            
+            //TODO: add error status code handling: 500, 4xx, etc.
+            if httpResponse.statusCode == 200 {
+                //Return the list of projects to the delegate
+                guard let projects = Project.retrieveProjects(from: jsonDictionary) else { return }
+
+                DispatchQueue.main.async {
+                    self.delegate?.projectsDataReceived(projects: projects)
                 }
             }
         }
