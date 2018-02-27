@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7NR-iv-oX1">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qTJ-Ct-pru">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -9,7 +9,23 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Projects Table View Controller-->
+        <!--Navigation Controller-->
+        <scene sceneID="bAh-CC-WJ7">
+            <objects>
+                <navigationController id="qTJ-Ct-pru" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="e6a-t1-GV2">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="7NR-iv-oX1" kind="relationship" relationship="rootViewController" id="RDY-ey-L6k"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="L68-hV-G9d" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1153" y="-146"/>
+        </scene>
+        <!--Projects-->
         <scene sceneID="hFv-ER-36Z">
             <objects>
                 <tableViewController id="7NR-iv-oX1" customClass="ProjectsTableViewController" customModule="Projects" customModuleProvider="target" sceneMemberID="viewController">
@@ -48,6 +64,7 @@
                             <outlet property="delegate" destination="7NR-iv-oX1" id="fzz-Zw-pb3"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Projects" id="VSS-5w-d7Y"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7XM-Ah-leQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

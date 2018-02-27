@@ -14,8 +14,12 @@ protocol TeamworkMediatorDelegate: class {
 }
 
 struct TeamworkConstants {
-    static let apiKey = "twp_IevR8gn9v7YPtoR9pvSMawLJjyHX"
-    static let projectsURL = "https://pablinludico.teamwork.com/projects.json"
+    //static let apiKey = "twp_IevR8gn9v7YPtoR9pvSMawLJjyHX" //pablin.ludico@gmail.com
+    static let apiKey = "twp_TEbBXGCnvl2HfvXWfkLUlzx92e3T" // Cat (yat@triplespin.com)
+    
+    //static let projectsURL = "https://pablinludico.teamwork.com/projects.json"
+    static let projectsURL = "https://yat.teamwork.com/projects.json"
+    
     
 }
 
