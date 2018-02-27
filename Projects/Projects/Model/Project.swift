@@ -76,9 +76,9 @@ struct Project {
         guard let projectsArray = json["projects"] as? [AnyObject] else { return nil } //TODO: we might want to do somenthing else rather than return nil ?
         
         var projects = [Project]()
-        for project in projectsArray {
-            if let projectDict = project as? [String: AnyObject] {
-                projects.append(Project(from: projectDict))
+        for projectData in projectsArray {
+            if let projectJson = projectData as? [String: AnyObject], let project = Project(from: projectJson) {
+                projects.append(project)
             }
         }
 
@@ -86,10 +86,14 @@ struct Project {
     }
     
     //TODO: Swift 4 provides cleaner ways to parse JSON using Codable. More info: https://benscheirman.com/2017/06/swift-json/
-    init(from json: [String: AnyObject]) {
-        name = json["name"] as? String
-        description = json["description"] as? String
-        company = Company(from: json)
+    init?(from json: [String: AnyObject]) {
+        guard let name = json["name"] as? String,
+            let description = json["description"] as? String,
+            let companyInfo = json["company"] as? [String: AnyObject] else { return nil }
+        
+        self.name = name
+        self.description = description
+        self.company = Company(from: companyInfo)
     }
 }
 
@@ -108,7 +112,7 @@ struct Company {
     
     init?(from jsonData: [String: AnyObject]) {
         guard let name = jsonData["name"] as? String,
-            let isOwnerString = jsonData["is - owner"] as? String,
+            let isOwnerString = jsonData["is-owner"] as? String,
             let id = jsonData["id"] as? String else {
                 return nil
                 

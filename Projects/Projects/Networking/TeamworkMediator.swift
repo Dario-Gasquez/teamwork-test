@@ -19,7 +19,7 @@ struct TeamworkConstants {
     
 }
 
-/// This singleton class is the middle man between an application and  Teamwork's API. The main functionality it provides is:
+/// This singleton class is the middle man between an application and  Teamwork's API. The main functionality it should provides is:
 /// - get user proyects
 /// - get list of tasks per project
 /// - add new tasks
