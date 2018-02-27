@@ -12,12 +12,13 @@ class ProjectsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.addSubview(loadIndicator)
 
         TeamworkMediator.shared.delegate = self
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        TeamworkMediator.shared.retrieveProjects()
+        refreshProjects()
     }
     
     // MARK: - Table view data source
@@ -54,15 +55,32 @@ class ProjectsTableViewController: UITableViewController {
     
     // MARK: - PRIVATE SECTION -
     
-    @IBAction func refreshProjects(_ sender: UIRefreshControl) {
+    @IBAction private func refreshProjects() {
+        showActivityIndicator()
         TeamworkMediator.shared.retrieveProjects()
     }
     
-    fileprivate var projects: [Project]? {
+    private var projects: [Project]? {
         didSet {
             tableView.reloadData()
         }
     }
+    
+    private var loadIndicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+    
+    private func showActivityIndicator() {
+        tableView.separatorStyle = .none
+        loadIndicator.hidesWhenStopped = true
+        loadIndicator.frame             = self.view.frame
+        loadIndicator.color             = UIColor.lightGray
+        loadIndicator.startAnimating()
+    }
+    
+    private func hideActivityIndicator() {
+        if loadIndicator.isAnimating { loadIndicator.stopAnimating() }
+        self.tableView.separatorStyle = .singleLine
+    }
+
 }
 
 extension ProjectsTableViewController: TeamworkMediatorDelegate {
@@ -70,13 +88,15 @@ extension ProjectsTableViewController: TeamworkMediatorDelegate {
         logMessage(.Info, error.debugDescription)
         showAlertError(error, in: self, completion: { [weak self] in
             guard let this = self else { return }
+            this.hideActivityIndicator()
             this.refreshControl?.endRefreshing()
         })
     }
     
     func projectsDataReceived(projects: [Project]) {
         logMessage(.Info, projects.debugDescription)
-        self.refreshControl?.endRefreshing()
+        hideActivityIndicator()
+        refreshControl?.endRefreshing()
         self.projects = projects
     }
 }
