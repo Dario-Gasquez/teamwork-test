@@ -13,20 +13,23 @@ class ProjectsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.addSubview(loadIndicator)
-
-        TeamworkMediator.shared.delegate = self
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        refreshProjects()
+        TeamworkMediator.shared.delegate = self
+        
+        if isFirstTimeShowing {
+            isFirstTimeShowing = false
+            refreshProjects()
+        }
     }
     
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return loadIndicator.isHidden ? 1 : 0
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -79,11 +82,14 @@ class ProjectsTableViewController: UITableViewController {
         }
     }
     
+    /// if this is the first time the screen is shown then retrieve the projects, otherwise only do it when the user pulls to refresh
+    private var isFirstTimeShowing = true
+    
     private var loadIndicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
     
     private func showActivityIndicator() {
         tableView.separatorStyle = .none
-        loadIndicator.hidesWhenStopped = true
+        loadIndicator.hidesWhenStopped  = true
         loadIndicator.frame             = self.view.frame
         loadIndicator.color             = UIColor.lightGray
         loadIndicator.startAnimating()
