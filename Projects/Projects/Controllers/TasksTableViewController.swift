@@ -16,40 +16,74 @@ class TasksTableViewController: UITableViewController {
         super.viewDidLoad()
 
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        updateHeader()
+        guard let projectInfo = project else { return }
+        
+        TeamworkMediator.shared.delegate = self
+        TeamworkMediator.shared.retrieveTasklists(for: projectInfo)
+    }
 
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
+        return project?.taskLists?.count ?? 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        guard let tasklistsCount = project?.taskLists?.count,
+            section < tasklistsCount else { return 0 }
+        
+        return project?.taskLists?[section].tasks?.count ?? 0
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        guard let title = project?.taskLists?[section].name else { return "tasklist title not available" }
+        
+        return title
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: StoryBoard.taskCellIdentifier, for: indexPath)
 
-        // Configure the cell...
-
+        let tasks = project?.taskLists?[indexPath.section].tasks
+        if let task = tasks?[indexPath.row] {
+            cell.textLabel?.text = task.content
+            cell.detailTextLabel?.text = task.description
+        }
+        
         return cell
     }
-    */
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
     //MARK: - PRIVATE SECTION -
+    private struct StoryBoard {
+        static let taskCellIdentifier = "TaskViewCell"
+    }
+
     
+    private func updateHeader() {
+        if let projectInfo = project {
+            //TODO: update header UI
+        }
+    }
+    
+}
+
+
+extension TasksTableViewController: TeamworkMediatorDelegate {
+    func projectTasklistsReceived() {
+        guard let projectInfo = project else { return }
+
+        //request the tasks for each tasklist
+        TeamworkMediator.shared.retrieveTasksForTasklists(in: projectInfo)
+    }
+    
+    func tasksForAllTasklistReceived() {
+        tableView.reloadData()
+    }
 }

@@ -18,6 +18,7 @@
 		A32520372045B14900758CAE /* ProjectsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32520362045B14900758CAE /* ProjectsTableViewController.swift */; };
 		A32520392045B27A00758CAE /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32520382045B27A00758CAE /* General.swift */; };
 		A325203C204607BF00758CAE /* TasksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A325203B204607BF00758CAE /* TasksTableViewController.swift */; };
+		A325203E2046F95200758CAE /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = A325203D2046F95200758CAE /* Task.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		A32520362045B14900758CAE /* ProjectsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsTableViewController.swift; sourceTree = "<group>"; };
 		A32520382045B27A00758CAE /* General.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = General.swift; sourceTree = "<group>"; };
 		A325203B204607BF00758CAE /* TasksTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksTableViewController.swift; sourceTree = "<group>"; };
+		A325203D2046F95200758CAE /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				A32520342045A31100758CAE /* Project.swift */,
+				A325203D2046F95200758CAE /* Task.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -254,6 +257,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A325203E2046F95200758CAE /* Task.swift in Sources */,
 				A32520392045B27A00758CAE /* General.swift in Sources */,
 				A325200C204594CE00758CAE /* AppDelegate.swift in Sources */,
 				A32520352045A31100758CAE /* Project.swift in Sources */,
