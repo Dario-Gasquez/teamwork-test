@@ -10,7 +10,11 @@ import UIKit
 
 class TasksTableViewController: UITableViewController {
 
-    var project: Project?
+    var project: Project? {
+        didSet {
+            updateHeader()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,12 +70,19 @@ class TasksTableViewController: UITableViewController {
     private struct StoryBoard {
         static let taskCellIdentifier = "TaskViewCell"
     }
+    
+    @IBOutlet private weak var projectName: UILabel!
+    @IBOutlet private weak var companyName: UILabel!
+    @IBOutlet private weak var projectCategory: UILabel!
+    
 
     private var loadIndicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
     
     private func updateHeader() {
         if let projectInfo = project {
-            //TODO: update header UI
+            projectName?.text       = projectInfo.name
+            companyName?.text       = projectInfo.company?.name
+            projectCategory?.text   = "Category: \(projectInfo.categoryName ?? "")"
         }
     }
     
@@ -95,7 +106,6 @@ extension TasksTableViewController: TeamworkMediatorDelegate {
     func projectTasklistsReceived() {
         guard let projectInfo = project else { return }
 
-        //request the tasks for each tasklist
         TeamworkMediator.shared.retrieveTasksForTasklists(in: projectInfo)
     }
     

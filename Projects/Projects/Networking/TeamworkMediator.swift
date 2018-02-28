@@ -29,16 +29,17 @@ struct TeamworkConstants {
 
     //static let projectsURL = "https://yat.teamwork.com/projects.json"
     static let projectsURL = "https://pablinludico.teamwork.com/projects.json"
+    
+    //static let tasklistsURL = "https://yat.teamwork.com/projects/{projectid}/tasklists.json"
     static let tasklistsURL = "https://pablinludico.teamwork.com/projects/{projectid}/tasklists.json"
+    
+    //static let tasksInTasklistURL = "https://yat.teamwork.com/tasklists/{tasklistid}/tasks.json"
     static let tasksInTasklistURL = "https://pablinludico.teamwork.com/tasklists/{tasklistid}/tasks.json"
-    
-    
 }
 
-/// This singleton class is the middle man between an application and  Teamwork's API. The main functionality it should provides is:
+/// This singleton class is the middle man between an application and Teamwork's API. The main functionality it provides is:
 /// - get user proyects
-/// - get list of tasks per project
-/// - add new tasks
+/// - get list of tasklists and task per project
 final class TeamworkMediator {
     
     //MARK: - PUBLIC SECTION -
@@ -105,11 +106,7 @@ final class TeamworkMediator {
             project.tasklistRequestCounter += 1
             retrieveTasks(for: tasklist, in: project)
         }
-        
     }
-    
-    
-
     
     
     //MARK: - PRIVATE SECTION -
@@ -141,9 +138,7 @@ final class TeamworkMediator {
                 }
             }
         }
-        
     }
-    
     
     
     typealias JSONDictionary = [String: AnyObject]
@@ -177,6 +172,7 @@ final class TeamworkMediator {
         
         task.resume()
     }
+    
     
     private func parseJSONFrom(data: Data) -> [String: AnyObject]? {
         do {

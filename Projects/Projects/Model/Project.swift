@@ -37,8 +37,8 @@ import Foundation
             },
             created - on: "2018-02-27T12:41:34Z",
             category: {
-                name: "",
-                id: "",
+                name: "mobile",
+                id: "17400",
                 color: ""
             },
             filesAutoNewVersion: false,
@@ -127,10 +127,11 @@ import Foundation
 
 /// Stores a Project
 class Project {
-    let name: String?
-    let description: String?
-    let company: Company?
-    let id: String?
+    var name: String?
+    var description: String?
+    var company: Company?
+    var id: String?
+    var categoryName: String?
     var taskLists: [TaskList]?
     /// This variable counts how many request have been made to retrieve tasks in a tasklist. It's incremented every time a new request is generated and decremented every time a request completes, once it reaches 0 it should inform the delegate that all the tasks have been retrieved.
     var tasklistRequestCounter = 0 //TODO: we probably can devise a more elegant solution
@@ -152,10 +153,12 @@ class Project {
     init(from json: [String: AnyObject]) {
         self.name = json["name"] as? String
         self.description = json["description"] as? String
+        
         if let companyInfo = json["company"] as? [String: AnyObject] {
             self.company = Company(from: companyInfo)
-        } else {
-            self.company = nil
+        }
+        if let categoryInfo = json["category"] as? [String: AnyObject] {
+            self.categoryName = categoryInfo["name"] as? String
         }
         self.id = json["id"] as? String
     }
