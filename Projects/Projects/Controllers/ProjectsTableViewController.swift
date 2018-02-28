@@ -22,6 +22,7 @@ class ProjectsTableViewController: UITableViewController {
         
         if isFirstTimeShowing {
             isFirstTimeShowing = false
+            showActivityIndicator()
             refreshProjects()
         }
     }
@@ -72,7 +73,6 @@ class ProjectsTableViewController: UITableViewController {
     }
     
     @IBAction private func refreshProjects() {
-        showActivityIndicator()
         TeamworkMediator.shared.retrieveProjects()
     }
     

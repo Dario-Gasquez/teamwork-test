@@ -14,7 +14,8 @@ class TasksTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        view.addSubview(loadIndicator)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -24,6 +25,7 @@ class TasksTableViewController: UITableViewController {
         guard let projectInfo = project else { return }
         
         TeamworkMediator.shared.delegate = self
+        showActivityIndicator()
         TeamworkMediator.shared.retrieveTasklists(for: projectInfo)
     }
 
@@ -31,7 +33,9 @@ class TasksTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return project?.taskLists?.count ?? 1
+        // If we are loading the tasks we do not want the empty rows to show (return 0)
+        let sectionsCount = loadIndicator.isHidden ? (project?.taskLists?.count ?? 1) : 0
+        return sectionsCount
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -41,10 +45,8 @@ class TasksTableViewController: UITableViewController {
         return project?.taskLists?[section].tasks?.count ?? 0
     }
     
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        guard let title = project?.taskLists?[section].name else { return "tasklist title not available" }
-        
-        return title
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {        
+        return project?.taskLists?[section].name
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -65,6 +67,7 @@ class TasksTableViewController: UITableViewController {
         static let taskCellIdentifier = "TaskViewCell"
     }
 
+    private var loadIndicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
     
     private func updateHeader() {
         if let projectInfo = project {
@@ -72,6 +75,19 @@ class TasksTableViewController: UITableViewController {
         }
     }
     
+
+    private func showActivityIndicator() {
+        loadIndicator.hidesWhenStopped = true
+        loadIndicator.frame             = self.view.frame
+        loadIndicator.color             = UIColor.lightGray
+        loadIndicator.backgroundColor   = UIColor.white
+        loadIndicator.startAnimating()
+    }
+    
+    
+    fileprivate func hideActivityIndicator() {
+        if loadIndicator.isAnimating { loadIndicator.stopAnimating() }
+    }
 }
 
 
@@ -83,7 +99,9 @@ extension TasksTableViewController: TeamworkMediatorDelegate {
         TeamworkMediator.shared.retrieveTasksForTasklists(in: projectInfo)
     }
     
+    
     func tasksForAllTasklistReceived() {
+        hideActivityIndicator()
         tableView.reloadData()
     }
 }
