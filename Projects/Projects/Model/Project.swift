@@ -9,76 +9,139 @@
 import Foundation
 
 /*
- SAMPLE 01 PROJECT JSON:
+ REQUEST:
+ https://pablinludico.teamwork.com/projects.json
+ 
+ RESPONSE JSON:
 {
-    replyByEmailEnabled: true,
-    starred: false,
-    show - announcement: false,
-    harvest - timers - enabled: false,
-    status: "active",
-    subStatus: "current",
-    defaultPrivacy: "open",
-    integrations: {
-        microsoftConnectors: {
-            enabled: false
-        },
-        onedrivebusiness: {
-            enabled: false,
-            folder: "root",
-            account: "",
-            foldername: "root"
-        }
-    },
-    created - on: "2018-02-27T12:41:34Z",
-    category: {
-        name: "",
-        id: "",
-        color: ""
-    },
-    filesAutoNewVersion: false,
-    overview - start - page: "default",
-    tags: [],
-    logo: "",
-    startDate: "",
-    id: "292215",
-    last - changed - on: "2018-02-27T12:41:43Z",
-    endDate: "",
-    defaults: {
-        privacy: ""
-    },
-    company: {
-        name: "PablinLudico",
-        is - owner: "1",
-        id: "99591"
-    },
-    tasks - start - page: "default",
-    name: "2nd Project",
-    privacyEnabled: false,
-    description: "",
-    announcement: "",
-    isProjectAdmin: true,
-    start - page: "projectoverview",
-    notifyeveryone: false,
-    boardData: {},
-    announcementHTML: ""
+    STATUS: "OK",
+    projects: [
+        {
+            replyByEmailEnabled: true,
+            starred: false,
+            show - announcement: false,
+            harvest - timers - enabled: false,
+            status: "active",
+            subStatus: "current",
+            defaultPrivacy: "open",
+            integrations: {
+                microsoftConnectors: {
+                    enabled: false
+                },
+                onedrivebusiness: {
+                    enabled: false,
+                    folder: "root",
+                    account: "",
+                    foldername: "root"
+                }
+            },
+            created - on: "2018-02-27T12:41:34Z",
+            category: {
+                name: "",
+                id: "",
+                color: ""
+            },
+            filesAutoNewVersion: false,
+            overview - start - page: "default",
+            tags: [],
+            logo: "",
+            startDate: "",
+            id: "292215",
+            last - changed - on: "2018-02-27T23:04:24Z",
+            endDate: "",
+            defaults: {
+                privacy: ""
+            },
+            company: {
+                name: "PablinLudico",
+                is - owner: "1",
+                id: "99591"
+            },
+            tasks - start - page: "default",
+            name: "2nd Project",
+            privacyEnabled: false,
+            description: "",
+            announcement: "",
+            isProjectAdmin: true,
+            start - page: "projectoverview",
+            notifyeveryone: false,
+            boardData: {},
+            announcementHTML: ""
+},
+        {
+            replyByEmailEnabled: true,
+            starred: false,
+            show - announcement: false,
+            harvest - timers - enabled: false,
+            status: "active",
+            subStatus: "current",
+            defaultPrivacy: "open",
+            integrations: {
+                microsoftConnectors: {
+                    enabled: false
+                },
+                onedrivebusiness: {
+                    enabled: false,
+                    folder: "root",
+                    account: "",
+                    foldername: "root"
+                }
+            },
+            created - on: "2018-02-27T12:41:06Z",
+            category: {
+                name: "",
+                id: "",
+                color: ""
+            },
+            filesAutoNewVersion: false,
+            overview - start - page: "default",
+            tags: [],
+            logo: "",
+            startDate: "",
+            id: "292213",
+            last - changed - on: "2018-02-27T12:41:19Z",
+            endDate: "",
+            defaults: {
+                privacy: ""
+            },
+            company: {
+                name: "PablinLudico",
+                is - owner: "1",
+                id: "99591"
+            },
+            tasks - start - page: "default",
+            name: "MFP",
+            privacyEnabled: false,
+            description: "",
+            announcement: "",
+            isProjectAdmin: true,
+            start - page: "projectoverview",
+            notifyeveryone: false,
+            boardData: {},
+            announcementHTML: ""
+}
+]
 }
 */
 
 
 /// Stores a Project
-struct Project {
+class Project {
     let name: String?
     let description: String?
     let company: Company?
+    let id: String?
+    var taskLists: [TaskList]?
+    /// This variable counts how many request have been made to retrieve tasks in a tasklist. It's incremented every time a new request is generated and decremented every time a request completes, once it reaches 0 it should inform the delegate that all the tasks have been retrieved.
+    var tasklistRequestCounter = 0 //TODO: we probably can devise a more elegant solution
     
     static func retrieveProjects(from json: [String: AnyObject]) -> [Project]? {
-        
         guard let projectsArray = json["projects"] as? [AnyObject] else { return nil } //TODO: we might want to do somenthing else rather than return nil ?
         
         var projects = [Project]()
         for projectData in projectsArray {
-            if let projectJson = projectData as? [String: AnyObject], let project = Project(from: projectJson) {
-                projects.append(project)
+            if let projectJson = projectData as? [String: AnyObject] {
+                projects.append(Project(from: projectJson))
             }
         }
 
@@ -86,14 +149,15 @@ struct Project {
     }
     
     //TODO: Swift 4 provides cleaner ways to parse JSON using Codable. More info: https://benscheirman.com/2017/06/swift-json/
-    init?(from json: [String: AnyObject]) {
-        guard let name = json["name"] as? String,
-            let description = json["description"] as? String,
-            let companyInfo = json["company"] as? [String: AnyObject] else { return nil }
-        
-        self.name = name
-        self.description = description
-        self.company = Company(from: companyInfo)
+    init(from json: [String: AnyObject]) {
+        self.name = json["name"] as? String
+        self.description = json["description"] as? String
+        if let companyInfo = json["company"] as? [String: AnyObject] {
+            self.company = Company(from: companyInfo)
+        } else {
+            self.company = nil
+        }
+        self.id = json["id"] as? String
     }
 }
 

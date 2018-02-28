@@ -13,18 +13,24 @@ class ProjectsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.addSubview(loadIndicator)
-
-        TeamworkMediator.shared.delegate = self
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        refreshProjects()
+        super.viewWillAppear(animated)
+        
+        TeamworkMediator.shared.delegate = self
+        
+        if isFirstTimeShowing {
+            isFirstTimeShowing = false
+            showActivityIndicator()
+            refreshProjects()
+        }
     }
     
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return loadIndicator.isHidden ? 1 : 0
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -34,8 +40,8 @@ class ProjectsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let projectsData = projects, indexPath.row < projectsData.count else { return UITableViewCell() }
         
-        //TODO: We could create a custom ProjectInformationCell class that allows as to show additional project information in each table view cell, customizing its UI elements (size, color, layout, etcetera).
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ProjectInformationCell", for: indexPath)
+        //TODO: Create a custom ProjectInformationCell class that allows as to show additional project information in each cell, customizing its UI elements (size, color, layout, etcetera).
+        let cell = tableView.dequeueReusableCell(withIdentifier: StoryBoard.projectInformationCellIdentifier, for: indexPath)
         cell.textLabel?.text = projectsData[indexPath.row].name
         cell.detailTextLabel?.text = projectsData[indexPath.row].company?.name
         
@@ -43,21 +49,30 @@ class ProjectsTableViewController: UITableViewController {
     }
 
 
-    /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        guard let segueID = segue.identifier, let selectedRow = tableView.indexPathForSelectedRow?.row else { return }
+        
+        switch segueID {
+        case StoryBoard.showProjectTasksSegueIdentifier:
+            if let tasksVC = segue.destination as? TasksTableViewController {
+                tasksVC.project = projects?[selectedRow]
+            }
+        default:
+            break
+        }
     }
-    */
+
     
     
     // MARK: - PRIVATE SECTION -
+    private struct StoryBoard {
+        static let showProjectTasksSegueIdentifier = "ShowProjectTasks"
+        static let projectInformationCellIdentifier = "ProjectInformationCell"
+    }
     
     @IBAction private func refreshProjects() {
-        showActivityIndicator()
         TeamworkMediator.shared.retrieveProjects()
     }
     
@@ -67,11 +82,14 @@ class ProjectsTableViewController: UITableViewController {
         }
     }
     
+    /// if this is the first time the screen is shown then retrieve the projects, otherwise only do it when the user pulls to refresh
+    private var isFirstTimeShowing = true
+    
     private var loadIndicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
     
     private func showActivityIndicator() {
         tableView.separatorStyle = .none
-        loadIndicator.hidesWhenStopped = true
+        loadIndicator.hidesWhenStopped  = true
         loadIndicator.frame             = self.view.frame
         loadIndicator.color             = UIColor.lightGray
         loadIndicator.startAnimating()
