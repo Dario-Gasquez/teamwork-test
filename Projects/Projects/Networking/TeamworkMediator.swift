@@ -24,17 +24,17 @@ extension TeamworkMediatorDelegate {
 }
 
 struct TeamworkConstants {
+    // yat@triplespin.com test account:
     static let apiKey = "twp_TEbBXGCnvl2HfvXWfkLUlzx92e3T" // Cat (yat@triplespin.com)
-    //static let apiKey = "twp_IevR8gn9v7YPtoR9pvSMawLJjyHX" //pablin.ludico@gmail.com
-
     static let projectsURL = "https://yat.teamwork.com/projects.json"
-    //static let projectsURL = "https://pablinludico.teamwork.com/projects.json"
-    
     static let tasklistsURL = "https://yat.teamwork.com/projects/{projectid}/tasklists.json"
-    //static let tasklistsURL = "https://pablinludico.teamwork.com/projects/{projectid}/tasklists.json"
-    
     static let tasksInTasklistURL = "https://yat.teamwork.com/tasklists/{tasklistid}/tasks.json"
-    //static let tasksInTasklistURL = "https://pablinludico.teamwork.com/tasklists/{tasklistid}/tasks.json"
+
+    // PablinLudico test account:
+//    static let apiKey = "twp_IevR8gn9v7YPtoR9pvSMawLJjyHX" //pablin.ludico@gmail.com
+//    static let projectsURL = "https://pablinludico.teamwork.com/projects.json"
+//    static let tasklistsURL = "https://pablinludico.teamwork.com/projects/{projectid}/tasklists.json"
+//    static let tasksInTasklistURL = "https://pablinludico.teamwork.com/tasklists/{tasklistid}/tasks.json"
 }
 
 /// This singleton class is the middle man between an application and Teamwork's API. The main functionality it provides is:

@@ -22,6 +22,7 @@ class TasksTableViewController: UITableViewController {
         view.addSubview(loadIndicator)
     }
     
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -32,8 +33,13 @@ class TasksTableViewController: UITableViewController {
         showActivityIndicator()
         TeamworkMediator.shared.retrieveTasklists(for: projectInfo)
     }
-
-
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        downloadTask?.cancel()
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -83,15 +89,21 @@ class TasksTableViewController: UITableViewController {
     @IBOutlet private weak var projectName: UILabel!
     @IBOutlet private weak var companyName: UILabel!
     @IBOutlet private weak var projectCategory: UILabel!
+    @IBOutlet private weak var projectLogo: UIImageView!
     
 
     private var loadIndicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+    private var downloadTask: URLSessionDownloadTask?
     
     private func updateHeader() {
-        if let projectInfo = project {
-            projectName?.text       = projectInfo.name
-            companyName?.text       = projectInfo.company?.name
-            projectCategory?.text   = "Category: \(projectInfo.categoryName ?? "")"
+        guard let projectInfo = project else { return }
+        
+        projectName?.text       = projectInfo.name
+        companyName?.text       = projectInfo.company?.name
+        projectCategory?.text   = "Category: \(projectInfo.categoryName ?? "")"
+        if let projectLogoURLString = projectInfo.projectLogoURL,
+            let imageURL = URL(string: projectLogoURLString) {
+            downloadTask = projectLogo?.loadImageWith(url: imageURL, session: URLSession.shared)
         }
     }
     

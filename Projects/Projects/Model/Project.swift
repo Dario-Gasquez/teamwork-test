@@ -44,7 +44,7 @@ import Foundation
             filesAutoNewVersion: false,
             overview - start - page: "default",
             tags: [],
-            logo: "",
+            logo: "https://s3.amazonaws.com/TWFiles/463631/projectLogo/tf_B1812D60-E9E0-8073-2CEA279679E5D275.FiatPalioAdventure18.jpg",
             startDate: "",
             id: "292215",
             last - changed - on: "2018-02-27T23:04:24Z",
@@ -125,7 +125,7 @@ import Foundation
 */
 
 
-/// Stores a Project
+/// Contains a Teamwork Project information
 class Project {
     var name: String?
     var description: String?
@@ -133,6 +133,8 @@ class Project {
     var id: String?
     var categoryName: String?
     var taskLists: [TaskList]?
+    var projectLogoURL: String? //example: "https://s3.amazonaws.com/TWFiles/463631/projectLogo/tf_B1812D60-E9E0-8073-2CEA279679E5D275.FiatPalioAdventure18.jpg"
+    
     /// This variable counts how many request have been made to retrieve tasks in a tasklist. It's incremented every time a new request is generated and decremented every time a request completes, once it reaches 0 it should inform the delegate that all the tasks have been retrieved.
     var tasklistRequestCounter = 0 //TODO: we probably can devise a more elegant solution
     
@@ -151,18 +153,20 @@ class Project {
     
     //TODO: Swift 4 provides cleaner ways to parse JSON using Codable. More info: https://benscheirman.com/2017/06/swift-json/
     init(from json: [String: AnyObject]) {
-        self.name = json["name"] as? String
-        self.description = json["description"] as? String
+        name = json["name"] as? String
+        description = json["description"] as? String
         
         if let companyInfo = json["company"] as? [String: AnyObject] {
-            self.company = Company(from: companyInfo)
+            company = Company(from: companyInfo)
         }
         if let categoryInfo = json["category"] as? [String: AnyObject] {
-            self.categoryName = categoryInfo["name"] as? String
+            categoryName = categoryInfo["name"] as? String
         }
-        self.id = json["id"] as? String
+        id = json["id"] as? String
+        projectLogoURL = json["logo"] as? String
     }
 }
+
 
 /*
 SAMPLE JSON

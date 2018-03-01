@@ -20,6 +20,7 @@
 		A325203C204607BF00758CAE /* TasksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A325203B204607BF00758CAE /* TasksTableViewController.swift */; };
 		A325203E2046F95200758CAE /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = A325203D2046F95200758CAE /* Task.swift */; };
 		A33B90AB204789BF00C8D440 /* TaskList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33B90AA204789BF00C8D440 /* TaskList.swift */; };
+		A33B90AD2048578200C8D440 /* UIImageView+DownloadImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33B90AC2048578200C8D440 /* UIImageView+DownloadImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,7 @@
 		A325203B204607BF00758CAE /* TasksTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksTableViewController.swift; sourceTree = "<group>"; };
 		A325203D2046F95200758CAE /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		A33B90AA204789BF00C8D440 /* TaskList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskList.swift; sourceTree = "<group>"; };
+		A33B90AC2048578200C8D440 /* UIImageView+DownloadImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+DownloadImage.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,9 +75,9 @@
 		A3251FFF204594CE00758CAE = {
 			isa = PBXGroup;
 			children = (
+				A3252009204594CE00758CAE /* Products */,
 				A325200A204594CE00758CAE /* Projects */,
 				A325201F204594CE00758CAE /* ProjectsTests */,
-				A3252009204594CE00758CAE /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -91,16 +93,16 @@
 		A325200A204594CE00758CAE /* Projects */ = {
 			isa = PBXGroup;
 			children = (
-				A3252031204598F900758CAE /* Utilities */,
-				A325202E2045951000758CAE /* Networking */,
-				A325202D204594FA00758CAE /* Controllers */,
-				A325202C204594F200758CAE /* UI */,
-				A325202B204594EB00758CAE /* Model */,
-				A325200B204594CE00758CAE /* AppDelegate.swift */,
-				A325200F204594CE00758CAE /* Main.storyboard */,
-				A3252012204594CE00758CAE /* Assets.xcassets */,
-				A3252014204594CE00758CAE /* LaunchScreen.storyboard */,
 				A3252017204594CE00758CAE /* Info.plist */,
+				A325200B204594CE00758CAE /* AppDelegate.swift */,
+				A3252012204594CE00758CAE /* Assets.xcassets */,
+				A325202D204594FA00758CAE /* Controllers */,
+				A3252014204594CE00758CAE /* LaunchScreen.storyboard */,
+				A325200F204594CE00758CAE /* Main.storyboard */,
+				A325202B204594EB00758CAE /* Model */,
+				A325202E2045951000758CAE /* Networking */,
+				A325202C204594F200758CAE /* UI */,
+				A3252031204598F900758CAE /* Utilities */,
 			);
 			path = Projects;
 			sourceTree = "<group>";
@@ -151,6 +153,7 @@
 		A3252031204598F900758CAE /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				A33B90AC2048578200C8D440 /* UIImageView+DownloadImage.swift */,
 				A32520382045B27A00758CAE /* General.swift */,
 				A32520322045990D00758CAE /* Logging.swift */,
 			);
@@ -264,6 +267,7 @@
 				A32520392045B27A00758CAE /* General.swift in Sources */,
 				A325200C204594CE00758CAE /* AppDelegate.swift in Sources */,
 				A33B90AB204789BF00C8D440 /* TaskList.swift in Sources */,
+				A33B90AD2048578200C8D440 /* UIImageView+DownloadImage.swift in Sources */,
 				A32520352045A31100758CAE /* Project.swift in Sources */,
 				A32520302045964600758CAE /* TeamworkMediator.swift in Sources */,
 				A32520332045990D00758CAE /* Logging.swift in Sources */,
