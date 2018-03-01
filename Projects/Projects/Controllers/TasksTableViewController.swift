@@ -64,6 +64,16 @@ class TasksTableViewController: UITableViewController {
         
         return cell
     }
+    
+    
+    //MARK: - UITableViewDelegate
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        guard let headerView = view as? UITableViewHeaderFooterView else { return }
+        
+        headerView.textLabel?.textColor             = UIColor.white
+        headerView.backgroundView?.backgroundColor  = UIColor(red: 20/255, green: 120/255, blue: 220/255, alpha: 1.0)
+
+    }
 
     
     //MARK: - PRIVATE SECTION -

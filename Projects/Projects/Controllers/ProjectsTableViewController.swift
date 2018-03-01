@@ -42,6 +42,12 @@ class ProjectsTableViewController: UITableViewController {
         
         //TODO: Create a custom ProjectInformationCell class that allows as to show additional project information in each cell, customizing its UI elements (size, color, layout, etcetera).
         let cell = tableView.dequeueReusableCell(withIdentifier: StoryBoard.projectInformationCellIdentifier, for: indexPath)
+
+        // set selection background color
+        let bgColorView = UIView()
+        bgColorView.backgroundColor = UIColor(red: 53/255, green: 154/255, blue: 255/255, alpha: 1.0)
+        cell.selectedBackgroundView = bgColorView
+        
         cell.textLabel?.text = projectsData[indexPath.row].name
         cell.detailTextLabel?.text = projectsData[indexPath.row].company?.name
         
