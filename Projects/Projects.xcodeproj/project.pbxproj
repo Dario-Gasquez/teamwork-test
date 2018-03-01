@@ -19,6 +19,7 @@
 		A32520392045B27A00758CAE /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32520382045B27A00758CAE /* General.swift */; };
 		A325203C204607BF00758CAE /* TasksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A325203B204607BF00758CAE /* TasksTableViewController.swift */; };
 		A325203E2046F95200758CAE /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = A325203D2046F95200758CAE /* Task.swift */; };
+		A33B90AB204789BF00C8D440 /* TaskList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33B90AA204789BF00C8D440 /* TaskList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		A32520382045B27A00758CAE /* General.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = General.swift; sourceTree = "<group>"; };
 		A325203B204607BF00758CAE /* TasksTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksTableViewController.swift; sourceTree = "<group>"; };
 		A325203D2046F95200758CAE /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		A33B90AA204789BF00C8D440 /* TaskList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +119,7 @@
 			children = (
 				A32520342045A31100758CAE /* Project.swift */,
 				A325203D2046F95200758CAE /* Task.swift */,
+				A33B90AA204789BF00C8D440 /* TaskList.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 				A325203E2046F95200758CAE /* Task.swift in Sources */,
 				A32520392045B27A00758CAE /* General.swift in Sources */,
 				A325200C204594CE00758CAE /* AppDelegate.swift in Sources */,
+				A33B90AB204789BF00C8D440 /* TaskList.swift in Sources */,
 				A32520352045A31100758CAE /* Project.swift in Sources */,
 				A32520302045964600758CAE /* TeamworkMediator.swift in Sources */,
 				A32520332045990D00758CAE /* Logging.swift in Sources */,

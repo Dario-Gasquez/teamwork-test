@@ -81,11 +81,13 @@
                         <attributedString key="attributedTitle">
                             <fragment content="Pull to refresh">
                                 <attributes>
+                                    <color key="NSColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <font key="NSFont" size="14" name=".SFNSText"/>
                                     <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                 </attributes>
                             </fragment>
                         </attributedString>
+                        <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <connections>
                             <action selector="refreshProjects" destination="7NR-iv-oX1" eventType="valueChanged" id="7rz-gY-JLd"/>
                         </connections>
@@ -152,7 +154,6 @@
                         <view key="tableFooterView" contentMode="scaleToFill" id="0s0-Jx-Ek8" userLabel="FooterView">
                             <rect key="frame" x="0.0" y="183" width="375" height="0.0"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TaskViewCell" textLabel="iEb-Aa-40N" detailTextLabel="otI-wD-iNV" style="IBUITableViewCellStyleSubtitle" id="mzd-Md-dRa">

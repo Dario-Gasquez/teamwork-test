@@ -72,7 +72,6 @@ class TasksTableViewController: UITableViewController {
         
         headerView.textLabel?.textColor             = UIColor.white
         headerView.backgroundView?.backgroundColor  = UIColor(red: 20/255, green: 120/255, blue: 220/255, alpha: 1.0)
-
     }
 
     
@@ -101,12 +100,12 @@ class TasksTableViewController: UITableViewController {
         loadIndicator.hidesWhenStopped = true
         loadIndicator.frame             = self.view.frame
         loadIndicator.color             = UIColor.lightGray
-        loadIndicator.backgroundColor   = UIColor.white
+        loadIndicator.backgroundColor   = UIColor(red: 17/255, green: 41/255, blue: 58/255, alpha: 1.0)
         loadIndicator.startAnimating()
     }
     
     
-    fileprivate func hideActivityIndicator() {
+    private func hideActivityIndicator() {
         if loadIndicator.isAnimating { loadIndicator.stopAnimating() }
     }
 }
