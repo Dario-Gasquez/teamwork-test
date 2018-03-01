@@ -10,13 +10,18 @@ import UIKit
 
 class TasksTableViewController: UITableViewController {
 
-    var project: Project?
+    var project: Project? {
+        didSet {
+            updateHeader()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.addSubview(loadIndicator)
     }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -28,8 +33,13 @@ class TasksTableViewController: UITableViewController {
         showActivityIndicator()
         TeamworkMediator.shared.retrieveTasklists(for: projectInfo)
     }
-
-
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        downloadTask?.cancel()
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -60,18 +70,41 @@ class TasksTableViewController: UITableViewController {
         
         return cell
     }
+    
+    
+    //MARK: - UITableViewDelegate
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        guard let headerView = view as? UITableViewHeaderFooterView else { return }
+        
+        headerView.textLabel?.textColor             = UIColor.white
+        headerView.backgroundView?.backgroundColor  = UIColor(red: 20/255, green: 120/255, blue: 220/255, alpha: 1.0)
+    }
 
     
     //MARK: - PRIVATE SECTION -
     private struct StoryBoard {
         static let taskCellIdentifier = "TaskViewCell"
     }
+    
+    @IBOutlet private weak var projectName: UILabel!
+    @IBOutlet private weak var companyName: UILabel!
+    @IBOutlet private weak var projectCategory: UILabel!
+    @IBOutlet private weak var projectLogo: UIImageView!
+    
 
     private var loadIndicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+    private var downloadTask: URLSessionDownloadTask?
     
     private func updateHeader() {
-        if let projectInfo = project {
-            //TODO: update header UI
+        guard let projectInfo = project else { return }
+        
+        projectName?.text       = projectInfo.name
+        companyName?.text       = projectInfo.company?.name
+        let categoryName = (projectInfo.categoryName != nil && !projectInfo.categoryName!.isEmpty) ? projectInfo.categoryName! : "<none>"
+        projectCategory?.text   = "Category: \(categoryName)"
+        if let projectLogoURLString = projectInfo.projectLogoURL,
+            let imageURL = URL(string: projectLogoURLString) {
+            downloadTask = projectLogo?.loadImageWith(url: imageURL, session: URLSession.shared)
         }
     }
     
@@ -80,12 +113,12 @@ class TasksTableViewController: UITableViewController {
         loadIndicator.hidesWhenStopped = true
         loadIndicator.frame             = self.view.frame
         loadIndicator.color             = UIColor.lightGray
-        loadIndicator.backgroundColor   = UIColor.white
+        loadIndicator.backgroundColor   = UIColor(red: 17/255, green: 41/255, blue: 58/255, alpha: 1.0)
         loadIndicator.startAnimating()
     }
     
     
-    fileprivate func hideActivityIndicator() {
+    private func hideActivityIndicator() {
         if loadIndicator.isAnimating { loadIndicator.stopAnimating() }
     }
 }
@@ -95,7 +128,6 @@ extension TasksTableViewController: TeamworkMediatorDelegate {
     func projectTasklistsReceived() {
         guard let projectInfo = project else { return }
 
-        //request the tasks for each tasklist
         TeamworkMediator.shared.retrieveTasksForTasklists(in: projectInfo)
     }
     
