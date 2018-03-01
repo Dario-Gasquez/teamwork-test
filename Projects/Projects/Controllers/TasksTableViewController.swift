@@ -26,9 +26,8 @@ class TasksTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        updateHeader()
         guard let projectInfo = project else { return }
-        
+        updateHeader()
         TeamworkMediator.shared.delegate = self
         showActivityIndicator()
         TeamworkMediator.shared.retrieveTasklists(for: projectInfo)
@@ -91,7 +90,6 @@ class TasksTableViewController: UITableViewController {
     @IBOutlet private weak var projectCategory: UILabel!
     @IBOutlet private weak var projectLogo: UIImageView!
     
-
     private var loadIndicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
     private var downloadTask: URLSessionDownloadTask?
     

@@ -20,6 +20,7 @@ class ProjectsTableViewController: UITableViewController {
         
         TeamworkMediator.shared.delegate = self
         
+        // Avoid requesting the projects every time the screen is shown
         if isFirstTimeShowing {
             isFirstTimeShowing = false
             showActivityIndicator()
@@ -71,8 +72,8 @@ class ProjectsTableViewController: UITableViewController {
     }
 
     
-    
     // MARK: - PRIVATE SECTION -
+    
     private struct StoryBoard {
         static let showProjectTasksSegueIdentifier = "ShowProjectTasks"
         static let projectInformationCellIdentifier = "ProjectInformationCell"

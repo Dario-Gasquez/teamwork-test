@@ -15,7 +15,7 @@ protocol TeamworkMediatorDelegate: class {
     func tasksForAllTasklistReceived()
 }
 
-// an extension that provides dummy defaults implementations to make the methods in the protocol optional to classes conforming to PSNMediatorDelegate
+// an extension that provides dummy default implementations to make the methods in the protocol optional to classes conforming to PSNMediatorDelegate
 extension TeamworkMediatorDelegate {
     func errorReceived(_ error: NSError) {}
     func projectsDataReceived(projects: [Project]) {}
@@ -182,5 +182,4 @@ final class TeamworkMediator {
             return nil
         }
     }
-    
 }
