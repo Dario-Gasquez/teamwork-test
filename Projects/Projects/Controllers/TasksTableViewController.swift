@@ -100,7 +100,8 @@ class TasksTableViewController: UITableViewController {
         
         projectName?.text       = projectInfo.name
         companyName?.text       = projectInfo.company?.name
-        projectCategory?.text   = "Category: \(projectInfo.categoryName ?? "")"
+        let categoryName = (projectInfo.categoryName != nil && !projectInfo.categoryName!.isEmpty) ? projectInfo.categoryName! : "<none>"
+        projectCategory?.text   = "Category: \(categoryName)"
         if let projectLogoURLString = projectInfo.projectLogoURL,
             let imageURL = URL(string: projectLogoURLString) {
             downloadTask = projectLogo?.loadImageWith(url: imageURL, session: URLSession.shared)
